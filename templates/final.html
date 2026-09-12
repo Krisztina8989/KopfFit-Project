@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>🏆 ENDERGEBNIS 🏆</h1>
+
+<button class="btn-option" onclick="document.querySelectorAll('.speed-col, .total-col').forEach(el => el.style.display='table-cell');">
+    ⚡ Schnelligkeits-Punkte Enthüllen!
+</button>
+
+<br><br>
+
+<table class="leader-table" style="width: 85%; margin: 0 auto; border-collapse: collapse;">
+    <tr style="background-color: #698b69; color: white;">
+        <th style="padding: 10px;">Rang</th>
+        <th style="padding: 10px;">Team</th>
+        <th style="padding: 10px;">Hauptpunkte</th>
+        <th class="speed-col" style="display:none; padding: 10px;">Schnelligkeits-Bonus</th>
+        <th class="total-col" style="display:none; padding: 10px;">Gesamtpunkte</th>
+    </tr>
+    {% for team in results %}
+    <tr style="border-bottom: 1px solid #ccc; text-align: center;">
+        <td style="padding: 10px;">{{ loop.index }}</td>
+        <td style="padding: 10px;">{{ team.name }}</td>
+        <td style="padding: 10px;">{{ team.main_score }}</td>
+        <td class="speed-col" style="display:none; padding: 10px;">+{{ team.speed_score }}</td>
+        <td class="total-col" style="display:none; padding: 10px; color: #2e7d32;"><strong>{{ team.total_score }}</strong></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br>
+<a href="{{ url_for('spiel_starten') }}" class="next-btn">Neues Spiel starten</a>
+{% endblock %}

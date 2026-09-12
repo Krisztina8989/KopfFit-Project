@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="quiz-box">
+    <h2>Kategorie: {{ session.current_category_name }} | Frage {{ session.question_index + 1 }}/10</h2>
+    <p style="font-size: 18px; color: #1a5276;"><strong>Punkte bei richtiger Antwort: {{ question_points }} Punkte</strong></p>
+
+    <h1 class="question-text">{{ question.question_text }}</h1>
+
+    <!--4antwortert_kästchen -->
+    <div class="options-grid">
+        <div class="answer-card" id="card-A">
+            <div><strong>A:</strong> {{ question.option_a }}</div>
+            <div class="team-badges" id="badges-A"></div>
+        </div>
+        <div class="answer-card" id="card-B">
+            <div><strong>B:</strong> {{ question.option_b }}</div>
+            <div class="team-badges" id="badges-B"></div>
+        </div>
+        <div class="answer-card" id="card-C">
+            <div><strong>C:</strong> {{ question.option_c }}</div>
+            <div class="team-badges" id="badges-C"></div>
+        </div>
+        <div class="answer-card" id="card-D">
+            <div><strong>D:</strong> {{ question.option_d }}</div>
+            <div class="team-badges" id="badges-D"></div>
+        </div>
+    </div>
+
+    <!--auswahl_teams-->
+    <form method="POST" id="quiz-form">
+        <h3>Antworten der Teams wählen:</h3>
+        {% for team in teams %}
+            <div class="team-select-box">
+                <strong>{{ team.team_name }}:</strong>
+                <input type="hidden" name="answer_team_{{ team.id }}" id="input-team-{{ team.id }}" required>
+                <input type="hidden" name="time_team_{{ team.id }}" id="time-team-{{ team.id }}" value="0">
+                {% for opt in ['A', 'B', 'C', 'D'] %}
+                    <button type="button"
+                            class="btn-option btn-team-{{ team.id }}"
+                            onclick="selectAnswer('{{ team.id }}', '{{ team.team_name }}', '{{ opt }}')">
+                        {{ opt }}
+                    </button>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <br>
+        <button type="submit" class="submit-btn">Antworten Auswerten ➔</button>
+    </form>
+</div>
+
+<script>
+    const teamSelections = {};
+    const startTime = Date.now();
+
+    function selectAnswer(teamId, teamName, option) {
+        const elapsedSeconds = (Date.now() - startTime) / 1000.0;
+        document.getElementById(`input-team-${teamId}`).value = option;
+        document.getElementById(`time-team-${teamId}`).value = elapsedSeconds;
+
+        document.querySelectorAll(`.btn-team-${teamId}`).forEach(btn => btn.classList.remove('selected'));
+        event.target.classList.add('selected');
+
+        teamSelections[teamId] = { name: teamName, option: option };
+        updateBadges();
+    }
+
+    function updateBadges() {
+        ['A', 'B', 'C', 'D'].forEach(opt => {
+            document.getElementById(`badges-${opt}`).innerHTML = '';
+        });
+
+        Object.values(teamSelections).forEach(sel => {
+            const badge = document.createElement('span');
+            badge.className = 'team-badge';
+            badge.innerText = sel.name;
+            document.getElementById(`badges-${sel.option}`).appendChild(badge);
+        });
+    }
+</script>
+{% endblock %}

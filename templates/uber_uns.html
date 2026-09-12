@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="headline">Über uns</h1>
+
+<!-- Gruppentext -->
+<div class="team-card">
+    <div class="team-card-text">
+        <p>
+            Hinter Kopffit steht ein motiviertes vierköpfiges Team. Wir befinden uns aktuell alle mitten in der Umschulung zum IT-Spezialisten und arbeiten von verschiedenen Standorten aus gemeinsam an dieser Herzensangelegenheit. Unterstützt werden wir dabei tatkräftig von unserer tierischen Motivation!
+        </p>
+    </div>
+    <div class="team-card-image">
+        <img src="{{ url_for('static', filename='images/team.png') }}" alt="Kopffit Team">
+    </div>
+</div>
+
+<!-- Ali -->
+<div class="team-card">
+    <div class="team-card-text">
+        <h3>Ali</h3>
+        <p><strong>Der Projektleiter:</strong> Mit seiner großen Erfahrung behält Ali stets den Überblick. Er koordiniert die Abläufe, hält das Team zusammen und sorgt dafür, dass aus einer guten Idee eine strukturierte und erfolgreiche Anwendung wird.</p>
+    </div>
+    <div class="team-card-image">
+        <img src="{{ url_for('static', filename='images/ali.png') }}" alt="Ali">
+    </div>
+</div>
+
+<!-- Marco -->
+<div class="team-card">
+    <div class="team-card-text">
+        <h3>Marco</h3>
+        <p><strong>Der Projektfinder:</strong> Die zündende Idee zu Kopffit kam von Marco. Mit seiner kreativen Vision hat er den Grundstein für das gesamte Projekt gelegt und treibt die Weiterentwicklung mit großer Leidenschaft voran.</p>
+    </div>
+    <div class="team-card-image">
+        <img src="{{ url_for('static', filename='images/marco.png') }}" alt="Marco">
+    </div>
+</div>
+
+<!-- Valentin -->
+<div class="team-card">
+    <div class="team-card-text">
+        <h3>Valentin</h3>
+        <p><strong>Der Entwickler:</strong> Valentin bringt die nötige technische Stärke in das Team ein. Seine Fähigkeiten in der Anwendungsentwicklung sorgen dafür, dass die App im Hintergrund stabil, performant und absolut zuverlässig läuft.</p>
+    </div>
+    <div class="team-card-image">
+        <img src="{{ url_for('static', filename='images/valentin.png') }}" alt="Valentin">
+    </div>
+</div>
+
+<!-- Krisztina -->
+<div class="team-card">
+    <div class="team-card-text">
+        <h3>Krisztina</h3>
+        <p><strong>Die Designerin:</strong> Krisztina ist für das Aussehen und die Barrierefreiheit zuständig. Sie sorgt dafür, dass die Benutzeroberfläche perfekt auf die Bedürfnisse von Senioren abgestimmt ist – mit klaren Kontrasten, einfacher Bedienung und einem freundlichen Design.</p>
+    </div>
+    <div class="team-card-image">
+        <img src="{{ url_for('static', filename='images/krisztina.png') }}" alt="Krisztina">
+    </div>
+</div>
+
+<!-- Berry u Luna -->
+<div class="team-card">
+    <div class="team-card-text">
+        <h3>Unterstützung auf Samtpfoten und Schlappohren</h3>
+        <p>Kein Projekt läuft ohne die richtige Motivation! Unsere Katze Luna behält von oben herab immer den strategischen Blick über den Code, während unser Spaniel Berry als offizieller Feel-Good-Manager dafür sorgt, dass bei der Arbeit die Freude und das Lächeln nie zu kurz kommen. Gemeinsam geben wir alle unser Bestes für Kopffit!</p>
+    </div>
+    <div class="team-card-image">
+        <img src="{{ url_for('static', filename='images/berry.png') }}" alt="Berry & Katze">
+        <img src="{{ url_for('static', filename='images/katze.png') }}" alt="Berry & Katze">
+    </div>
+</div>
+
+{% endblock %}

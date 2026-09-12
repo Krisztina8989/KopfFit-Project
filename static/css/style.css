@@ -1,0 +1,445 @@
+/* global_fur_alle_seiten */
+
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Sonsita+Swashed:wght@300..900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f4f9f6;
+    background-image: url('../images/efeu2.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+
+    color: #333333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*grosse Buttons */
+.btn-option, .submit-btn, .next-btn {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 6px;
+    border: 2px solid #698b69;
+    background: #698b69;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 0 #4e7a58, 0 6px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.1s ease;
+}
+/*aktiv_mit_maus_klicken*/
+.btn-option:active, .submit-btn:active, .next-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #4e7a58, 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/*antwort_möglichkeiten_auswählen*/
+.btn-option.selected {
+    background: #1a5276;
+    border-color: #1a5276;
+    box-shadow: 0 4px 0 #0f344d, 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* base.html*/
+nav {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+nav a {
+    font-family: "Sonsita Swashed", system-ui;
+    color: #698b69;
+    margin: 0 10px;
+    font-weight: bold;
+    font-size: 25px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+nav a:hover {
+    color: #698b69;
+    transform: scale(1.2);
+    z-index: 14;
+    }
+
+/* Haupt-Container */
+.container {
+    max-width: 1100px;
+    width: 90%;
+    margin: 25px auto;
+    background: rgba(255, 255, 255, 0.55);
+    padding: 35px;
+    border-radius: 16px;
+    position: relative;
+    z-index: 10;
+
+    box-shadow:
+        0 4px 6px -1px rgba(105, 139, 105, 0.15),
+        0 10px 15px -3px rgba(105, 139, 105, 0.2),
+        0 20px 25px -5px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(105, 139, 105, 0.15);
+}
+
+footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    width: 100%;
+}
+
+/* index.html*/
+
+/* haupttitel */
+.headline {
+    font-family: "Sonsita Swashed", system-ui;
+    color: #698b69;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* start_seite */
+.welcome-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    text-align: left;
+}
+
+.welcome-text {
+    flex: 1.2;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.gruppe_image {
+    flex: 0.8;
+    max-width: 45%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* uber_uns, Team-cards */
+.team-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(105, 139, 105, 0.2);
+    box-shadow: 0 4px 10px rgba(105, 139, 105, 0.08);
+    text-align: left;
+    width: 100%;
+}
+
+.team-card-text {
+    flex: 1.4;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.team-card-text h3 {
+    color: #698b69;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.team-card-image {
+    flex: 0.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-card-image img {
+    max-width: 160px;
+    max-height: 160px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* start-menu */
+.start-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.main-title {
+    font-family: "Sonsita Swashed", cursive, sans-serif;
+    font-size: 65px;
+    color: #698b69;
+    margin: 0;
+}
+
+.sub-title {
+    font-size: 22px;
+    color: #4a5d4a;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+/* spiel_starten_button */
+.btn-spiel-starten {
+    background: linear-gradient(135deg, #698b69 0%, #4e7a58 100%);
+    color: white !important;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 18px 40px;
+    border-radius: 40px;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 30px;
+}
+
+.btn-spiel-starten:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Untere kleinere Buttons */
+.menu-buttons-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 260px;
+}
+
+.btn-sub {
+    background: #698b69;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.btn-sub:hover {
+    transform: scale(1.05);
+}
+
+/* Pop-up Overlay & Content */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 450px;
+    width: 85%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: popIn 0.3s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.team-select-box {
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow:
+        0 4px 6px rgba(105, 139, 105, 0.08),
+        0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* game.html, answer.html */
+/* raster_antwortmöglichkeiten */
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+/* antworten */
+.answer-card {
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 20px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow:
+        0 4px 6px rgba(105, 139, 105, 0.08),
+        0 8px 16px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.answer-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 8px 12px rgba(105, 139, 105, 0.18),
+        0 16px 24px rgba(0, 0, 0, 0.08);
+}
+
+/*antworten_auswertung */
+.answer-card.correct {
+    background-color: #2e7d32 !important;
+    color: white !important;
+    border-color: #1b5e20 !important;
+}
+
+.answer-card.wrong {
+    background-color: #c62828 !important;
+    color: white !important;
+    border-color: #b71c1c !important;
+}
+
+/*teams_auf_dem_fragenseite*/
+.team-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.team-badge {
+    background-color: #1a5276;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/*kontakt.html */
+.container.kontakt-page {
+    max-width: 550px !important;
+    position: relative;
+}
+
+.kontakt-video-aussen {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+    z-index: 10;
+}
+
+.kontakt-links { right: 100%; margin-right: 25px; }
+.kontakt-rechts { left: 100%; margin-left: 25px; }
+
+.kontakt-video {
+    width: 160px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 1050px) {
+    .kontakt-video-aussen {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        justify-content: center;
+        margin: 15px 0;
+    }
+
+  .kontakt-video {
+        width: 120px;
+    }
+}
+
+@media (max-width: 1350px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 900px) {
+    .welcome-section {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .gruppe_image {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .options-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .team-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .team-card-image img {
+        max-width: 200px;
+    }
+}

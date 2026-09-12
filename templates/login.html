@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="headline">Anmeldung</h1>
+
+<div style="max-width: 400px; margin: 0 auto; text-align: left;">
+    <form action="{{ url_for('login') }}" method="POST">
+        <label><strong>Benutzername:</strong></label><br>
+        <input type="text" name="username" required style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc;"><br>
+
+        <label><strong>Passwort:</strong></label><br>
+        <input type="password" name="password" required style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc;"><br><br>
+
+        <button type="submit" class="submit-btn" style="width: 100%;">Anmelden ➔</button>
+    </form>
+    <br>
+    <p>Noch kein Konto? <a href="{{ url_for('register') }}">Hier registrieren</a></p>
+</div>
+
+{% endblock %}

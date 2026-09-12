@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block container_class %}kontakt-page{% endblock %}
+{% block content %}
+<!--linke seite-->
+<div class="kontakt-video-aussen kontakt-links">
+    <video class="kontakt-video" autoplay loop muted playsinline>
+        <source src="{{ url_for('static', filename='videos/video_valentin.mp4') }}" type="video/mp4">
+    </video>
+    <video class="kontakt-video" autoplay loop muted playsinline>
+        <source src="{{ url_for('static', filename='videos/video_marco.mp4') }}" type="video/mp4">
+    </video>
+</div>
+
+<h2>Willkommen auf unserer Kontaktseite!</h2>
+
+{% if success %}
+    <div style="background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 18px; text-align: center;">
+        ✅ Vielen Dank! Ihre Nachricht wurde versendet. Wir melden uns schnellstmöglich bei Ihnen.
+    </div>
+{% endif %}
+
+<p>
+    Wenn Sie Fragen zu unserem Projekt Kopffit oder Anregungen für unsere Quiz-App haben, freuen wir uns von Ihnen zu hören. Wir möchten das digitale Gedächtnistraining für Senioren- und Altenheime so optimal wie möglich gestalten und schätzen Ihr Feedback sehr.
+</p>
+
+<form action="{{ url_for('kontakt') }}" method="POST">
+    <label for="name">Name:</label><br>
+    <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            style="width: 100%; padding: 8px; margin-top: 4px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 6px;"><br>
+
+    <label for="email">E-Mail:</label><br>
+    <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            style="width: 100%; padding: 8px; margin-top: 4px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 6px;"><br>
+
+    <label for="nachricht">Nachricht:</label><br>
+    <textarea
+            id="nachricht"
+            name="nachricht"
+            rows="4"
+            required
+            style="width: 100%; padding: 8px; margin-top: 4px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 6px;"
+    ></textarea><br>
+
+    <button type="submit"
+            style="background-color: #1a5276; color: white; padding: 10px 20px; font-size: 18px;">
+            Absenden
+    </button>
+</form>
+
+<!--rechte Seite-->
+<div class="kontakt-video-aussen kontakt-rechts">
+    <video class="kontakt-video" autoplay loop muted playsinline>
+        <source src="{{ url_for('static', filename='videos/video_ali.mp4') }}" type="video/mp4">
+    </video>
+    <video class="kontakt-video" autoplay loop muted playsinline>
+        <source src="{{ url_for('static', filename='videos/video_krisztina.mp4') }}" type="video/mp4">
+    </video>
+</div>
+
+{% endblock %}

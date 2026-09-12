@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Ergebnis der Frage</h1>
+
+<div class="options-grid">
+    <!--a_kästchen-->
+    <div class="answer-card {% if question.correct_option == 'A' %}correct{% else %}wrong{% endif %}">
+        <div><strong>A:</strong> {{ question.option_a }}</div>
+        <div class="team-badges">
+            {% for team in teams %}
+                {% if answers[team.id] == 'A' %}
+                    <span class="team-badge">{{ team.team_name }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!--b_kästchen -->
+    <div class="answer-card {% if question.correct_option == 'B' %}correct{% else %}wrong{% endif %}">
+        <div><strong>B:</strong> {{ question.option_b }}</div>
+        <div class="team-badges">
+            {% for team in teams %}
+                {% if answers[team.id] == 'B' %}
+                    <span class="team-badge">{{ team.team_name }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!--c_kästchen -->
+    <div class="answer-card {% if question.correct_option == 'C' %}correct{% else %}wrong{% endif %}">
+        <div><strong>C:</strong> {{ question.option_c }}</div>
+        <div class="team-badges">
+            {% for team in teams %}
+                {% if answers[team.id] == 'C' %}
+                    <span class="team-badge">{{ team.team_name }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!--d_kästchen -->
+    <div class="answer-card {% if question.correct_option == 'D' %}correct{% else %}wrong{% endif %}">
+        <div><strong>D:</strong> {{ question.option_d }}</div>
+        <div class="team-badges">
+            {% for team in teams %}
+                {% if answers[team.id] == 'D' %}
+                    <span class="team-badge">{{ team.team_name }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="explanation-box" style="margin-top: 20px;">
+    <button onclick="document.getElementById('exp').style.display='block'" class="btn-option">❓ Erklärung anzeigen</button>
+    <p id="exp" style="display:none;" class="explanation-text">{{ question.explanation }}</p>
+</div>
+
+<br><br>
+<a href="{{ url_for('show_question') }}" class="next-btn">Nächste Frage ➔</a>
+{% endblock %}

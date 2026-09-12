@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if not session.get('user_id') %}
+
+<!--anmeldung,registrierung -->
+<div id="auth-container" style="max-width: 420px; margin: 0 auto; text-align: center;">
+    <h1 class="main-title" style="font-size: 50px;">KopfFit</h1>
+    <p class="sub-title">Bitte melden Sie sich an, um ein Spiel zu starten.</p>
+
+    <!-- formular -->
+    <div id="login-box" style="background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid rgba(105, 139, 105, 0.3); box-shadow: 0 4px 10px rgba(0,0,0,0.08); text-align: left;">
+        <h2 style="color: #698b69; margin-top: 0;">Anmeldung</h2>
+        <form action="{{ url_for('login') }}" method="POST">
+            <label><strong>Benutzername:</strong></label><br>
+            <input type="text" name="username" required style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc;"><br>
+
+            <label><strong>Passwort:</strong></label><br>
+            <input type="password" name="password" required style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc;"><br><br>
+
+            <button type="submit" class="submit-btn" style="width: 100%;">Anmelden ➔</button>
+        </form>
+        <br>
+        <p style="text-align: center; margin-bottom: 0;">Noch kein Konto? <a href="#" onclick="toggleAuth('register'); return false;" style="color: #1a5276; font-weight: bold;">Hier registrieren</a></p>
+    </div>
+
+    <!-- regFormular-->
+    <div id="register-box" style="display: none; background: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid rgba(105, 139, 105, 0.3); box-shadow: 0 4px 10px rgba(0,0,0,0.08); text-align: left;">
+        <h2 style="color: #698b69; margin-top: 0;">Registrierung</h2>
+        <form action="{{ url_for('register') }}" method="POST">
+            <label><strong>Benutzername:</strong></label><br>
+            <input type="text" name="username" required style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc;"><br>
+
+            <label><strong>Passwort:</strong></label><br>
+            <input type="password" name="password" required style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #ccc;"><br><br>
+
+            <button type="submit" class="submit-btn" style="width: 100%; background-color: #1a5276;">Konto erstellen ➔</button>
+        </form>
+        <br>
+        <p style="text-align: center; margin-bottom: 0;">Bereits registriert? <a href="#" onclick="toggleAuth('login'); return false;" style="color: #1a5276; font-weight: bold;">Hier anmelden</a></p>
+    </div>
+</div>
+
+<script>
+function toggleAuth(type) {
+    if (type === 'register') {
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('register-box').style.display = 'block';
+    } else {
+        document.getElementById('register-box').style.display = 'none';
+        document.getElementById('login-box').style.display = 'block';
+    }
+}
+</script>
+
+{% else %}
+
+<!-- BEREICH 2: Wenn Benutzer angemeldet ist (Normales Spiel-Start Menü) -->
+<div id="start-menu" class="start-menu-container">
+    <h1 class="main-title">KopfFit</h1>
+    <p class="sub-title">Willkommen, {{ session.get('username') }}! Starten Sie jetzt Ihr Abenteuer!</p>
+
+    <button type="button" class="btn-spiel-starten" onclick="showForm()">
+        💡 SPIEL STARTEN 💡 ➔
+    </button>
+
+    <div class="menu-buttons-sub">
+        <button type="button" class="btn-sub" onclick="openModal('anleitungModal')">
+            Anleitung lesen
+        </button>
+    </div>
+</div>
+
+<div id="team-form" style="display: none; text-align: left;">
+
+    <h2>Neues Quiz starten</h2>
+
+    <!-- 1. Team anlegen -->
+    <form action="{{ url_for('spiel_starten') }}" method="POST">
+        <h3>1. Neues Team für Ihr Konto anlegen:</h3>
+        <input type="text" name="new_team_name" placeholder="z. B. Die Quiz-Profis" required style="font-size: 16px; padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 250px;">
+        <button type="submit" class="btn-option">Team hinzufügen</button>
+    </form>
+
+    <br><hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;"><br>
+
+    <!-- 2. Teams auswählen & Spiel starten -->
+    <form action="{{ url_for('spiel_starten') }}" method="POST">
+        <h3>2. Mitspielende Teams wählen / Namen anpassen:</h3>
+
+        {% if not teams %}
+            <p style="color: #c62828;">Bitte legen Sie oben zuerst mindestens ein Team an!</p>
+        {% endif %}
+
+        {% for team in teams %}
+            <div style="display: flex; align-items: center; gap: 12px; margin: 12px 0;">
+                <input type="checkbox" id="team_{{ team.id }}" name="selected_teams" value="{{ team.id }}" style="transform: scale(1.4); cursor: pointer;">
+                <input type="text" name="team_name_{{ team.id }}" value="{{ team.team_name }}" style="font-size: 18px; padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px; width: 260px;">
+            </div>
+        {% endfor %}
+
+        <h3 style="margin-top: 25px;">3. Schwierigkeitsgrad wählen:</h3>
+        <select name="difficulty" required style="font-size: 18px; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+            <option value="Easy">Easy (Leicht)</option>
+            <option value="Medium">Medium (Mittel)</option>
+            <option value="Hard">Hard (Schwer)</option>
+        </select>
+
+        <br><br>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button type="submit" class="btn-option" style="background-color: #2e7d32; color: white; padding: 12px 24px; font-size: 20px;">
+                🚀 Spiel Jetzt Starten
+            </button>
+            <button type="button" class="btn-sub" onclick="showStartMenu()" style="background: #888;">
+                Zurück
+            </button>
+        </div>
+    </form>
+
+</div>
+
+<div id="anleitungModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal('anleitungModal')">&times;</span>
+        <h2>📖 Spielanleitung</h2>
+        <hr>
+        <p style="text-align: left; line-height: 1.6;">
+            <strong>Willkommen bei KopfFit!</strong><br><br>
+            1. Wählen Sie Ihre Teams und die Schwierigkeit.<br>
+            2. Der Computer wählt per Zufall aus, welches Team die jeweilige Kategorie bestimmt.<br>
+            3. Beantworten Sie 10 Fragen pro Kategorie.<br>
+            4. Schnelligkeit bringt verdeckte Bonuspunkte für das finale Endergebnis!
+        </p>
+        <button type="button" class="btn-sub" onclick="closeModal('anleitungModal')">Schließen</button>
+    </div>
+</div>
+
+<script>
+function showForm() {
+    document.getElementById('start-menu').style.display = 'none';
+    document.getElementById('team-form').style.display = 'block';
+}
+
+function showStartMenu() {
+    document.getElementById('team-form').style.display = 'none';
+    document.getElementById('start-menu').style.display = 'flex';
+}
+
+function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal-overlay')) {
+        event.target.style.display = 'none';
+    }
+}
+</script>
+
+{% endif %}
+
+{% endblock %}

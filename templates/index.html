@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="headline">Willkommen bei KopfFit!</h1>
+
+<div class="welcome-section">
+    <div class="welcome-text">
+        <p>
+            <strong>Gemeinsam Freude & Geistesfitness erleben.</strong><br>
+            Kopffit ist die barrierefreie Quiz-App, die speziell für den Einsatz in Senioren- und Altenheimen entwickelt wurde. Unser Ziel ist es, spielerisch die grauen Zellen zu aktivieren, wertvolle Erinnerungen zu wecken und gemeinsame Momente voller Freude in den Pflegealltag zu bringen.
+        </p>
+
+        <p>
+            Egal ob bei spannenden Fragen zu bekannten Sprichwörtern, Musikklassikern oder historischer Heimatkunde – die intuitive Bedienung ermöglicht es jedem Bewohner, sofort und ohne Vorkenntnisse mitzuraten.
+        </p>
+
+        <p>Erfahren Sie mehr über unsere Vision, entdecken Sie die Funktionen der App oder lernen Sie das Team hinter Kopffit kennen!</p>
+        <p><strong>Das digitale Gedächtnistraining für Senioren- und Altenheime.</strong></p>
+    </div>
+
+    <img class="gruppe_image" src="{{ url_for('static', filename='images/gruppe.png') }}" alt="Spielen zusammen">
+</div>
+
+{% endblock %}

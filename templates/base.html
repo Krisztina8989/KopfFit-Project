@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt Kopffit</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Sonsita+Swashed:wght@300..900&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <a href="{{ url_for('index') }}">Start Seite</a>
+        <a href="{{ url_for('spiel_starten') }}">Spiel starten</a>
+        <a href="{{ url_for('uber_uns') }}">Über uns</a>
+        <a href="{{ url_for('kontakt') }}">Kontakt</a>
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('logout') }}" style="color: #c62828;">Abmelden</a>
+        {% endif %}
+    </nav>
+
+    <main class="container {% block container_class %}{% endblock %}">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div style="padding: 10px; margin-bottom: 15px; border-radius: 6px; background-color: {% if category=='danger' %}#f8d7da{% elif category=='success' %}#d4edda{% else %}#e2e3e5{% endif %}; color: #333; text-align: center;">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 FIAE B.1 Winter 2026 - Alle Angaben ohne Gewähr. - Impressum - Datenschutz - </p>
+    </footer>
+
+</body>
+</html>

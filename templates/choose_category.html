@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Runde {{ round_num }} von 5</h1>
+
+<div style="background-color: #e8f5e9; border: 2px solid #2e7d32; padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+    <h2>🎲 Der Computer hat entschieden:</h2>
+    <h1 style="color: #1a5276;">Team "{{ choosing_team.team_name }}" darf die Kategorie wählen!</h1>
+</div>
+
+<h3>Verfügbare Kategorien:</h3>
+
+<form method="POST">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 600px; margin: 0 auto;">
+        {% for cat in categories %}
+            <button type="submit" name="category_id" value="{{ cat.id }}" class="btn-option" style="padding: 15px; font-size: 18px;">
+                📂 {{ cat.name }}
+            </button>
+        {% endfor %}
+    </div>
+</form>
+
+{% endblock %}

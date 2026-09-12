@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>📊 Zwischentafel nach Runde {{ current_round }}</h1>
+
+<table class="leader-table" style="width: 80%; margin: 0 auto; border-collapse: collapse;">
+    <tr style="background-color: #698b69; color: white;">
+        <th style="padding: 10px;">Rang</th>
+        <th style="padding: 10px;">Team</th>
+        <th style="padding: 10px;">Punkte</th>
+    </tr>
+    {% for team in ranks %}
+    <tr style="border-bottom: 1px solid #ccc; text-align: center;">
+        <td style="padding: 10px;">{{ loop.index }}</td>
+        <td style="padding: 10px;">{{ team.name }}</td>
+        <td style="padding: 10px;"><strong>{{ team.score }}</strong></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br>
+<a href="{{ url_for('choose_category') }}" class="next-btn">Nächste Runde Starten ➔</a>
+{% endblock %}
